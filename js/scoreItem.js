@@ -20,6 +20,6 @@ export class ScoreItem extends GameObject {
 
     paint(g) {
         g.setColor(0x0000FF);
-        g.drawString('★', this.x, this.y, 1 | 2); // HCENTER | VCENTER
+        g.drawString('♪', this.x, this.y, 1 | 2); // HCENTER | VCENTER
     }
 }
