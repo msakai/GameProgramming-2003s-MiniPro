@@ -22,6 +22,6 @@ public class ScoreItem extends GameObject {
 
     public void paint(Graphics g) {
         g.setColor(0x0000FF);
-        g.drawString("ÅÙ", x, y, g.HCENTER | g.VCENTER);
+        g.drawString("‚ô™", x, y, g.HCENTER | g.VCENTER);
     }
 }

@@ -26,10 +26,10 @@ public class Title extends GameObject
         g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         g.setColor(0xFFFFFF);
-	g.drawString("ƒeƒjƒXƒ{[ƒ‹‚Ì",
+	g.drawString("ãƒ†ãƒ‹ã‚¹ãƒœãƒ¼ãƒ«ã®",
 		     canvas.getWidth()/2, 20,
 		     g.HCENTER | g.TOP);
-	g.drawString("Šï–­‚ÈƒVƒ…[ƒeƒBƒ“ƒO",
+	g.drawString("å¥‡å¦™ãªã‚·ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ³ã‚°",
 		     canvas.getWidth()/2, 40,
 		     g.HCENTER | g.TOP);
 
@@ -37,19 +37,19 @@ public class Title extends GameObject
 	int x = 10;
 	Font f = g.getFont();
 
-	g.drawString("©¨ª«‚ÅˆÚ“®",
+	g.drawString("â†â†’â†‘â†“ã§ç§»å‹•",
 		     x, y,
 		     g.LEFT | g.TOP);
 	y += f.getHeight();
-	g.drawString("uôv‚Í“¾“_",
+	g.drawString("ã€Œâ™ªã€ã¯å¾—ç‚¹",
 		     x, y,
 		     g.LEFT | g.TOP);
 	y += f.getHeight();
-	g.drawString("–Ú•W2–œ“_",
+	g.drawString("ç›®æ¨™2ä¸‡ç‚¹",
 		     x, y,
 		     g.LEFT | g.TOP);
 
-	g.drawString("š PRESS ENTER š",
+	g.drawString("â˜… PRESS ENTER â˜…",
 		     canvas.getWidth()/2, canvas.getHeight()-20,
 		     g.HCENTER | g.BOTTOM);
     }
