@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>テニスボールの奇妙なシューティング</title>
 <style>
   * { margin: 0; padding: 0; }
@@ -13,16 +14,63 @@
     height: 100vh;
     overflow: hidden;
   }
-  canvas {
+  #gameCanvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     width: 480px;
     height: 640px;
   }
+
+  /* Game container */
+  #game-container {
+    position: relative;
+  }
+
+  /* Touch controls container */
+  #touch-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* D-pad layout */
+  #dpad {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 160px;
+    height: 160px;
+    pointer-events: auto;
+  }
+
+  #dpad-canvas {
+    touch-action: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Hide on desktop with mouse pointer */
+  @media (min-width: 768px) and (pointer: fine) {
+    #touch-controls {
+      display: none;
+    }
+  }
 </style>
 </head>
 <body>
-<canvas id="gameCanvas" width="120" height="160"></canvas>
+<div id="game-container">
+  <canvas id="gameCanvas" width="120" height="160"></canvas>
+  <div id="touch-controls">
+    <!-- D-pad -->
+    <div id="dpad">
+      <canvas id="dpad-canvas" width="160" height="160"></canvas>
+    </div>
+  </div>
+</div>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>
