@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>テニスボールの奇妙なシューティング</title>
 <style>
   * { margin: 0; padding: 0; }
@@ -19,10 +20,101 @@
     width: 480px;
     height: 640px;
   }
+
+  /* Game container */
+  #game-container {
+    position: relative;
+  }
+
+  /* Touch controls container */
+  #touch-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* D-pad layout */
+  #dpad {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 160px;
+    height: 160px;
+    pointer-events: auto;
+  }
+
+  #dpad button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    border-radius: 8px;
+    color: white;
+    font-size: 24px;
+    touch-action: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #dpad button:active {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  #btn-up    { top: 0; left: 55px; }
+  #btn-down  { bottom: 0; left: 55px; }
+  #btn-left  { top: 55px; left: 0; }
+  #btn-right { top: 55px; right: 0; }
+
+  /* Fire button */
+  #btn-fire {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 100, 100, 0.4);
+    border: 3px solid white;
+    border-radius: 50%;
+    color: white;
+    font-size: 32px;
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #btn-fire:active {
+    background: rgba(255, 100, 100, 0.7);
+  }
+
+  /* Hide on desktop with mouse pointer */
+  @media (min-width: 768px) and (pointer: fine) {
+    #touch-controls {
+      display: none;
+    }
+  }
 </style>
 </head>
 <body>
-<canvas id="gameCanvas" width="120" height="160"></canvas>
+<div id="game-container">
+  <canvas id="gameCanvas" width="120" height="160"></canvas>
+  <div id="touch-controls">
+    <!-- D-pad -->
+    <div id="dpad">
+      <button id="btn-up" class="dpad-btn">↑</button>
+      <button id="btn-left" class="dpad-btn">←</button>
+      <button id="btn-right" class="dpad-btn">→</button>
+      <button id="btn-down" class="dpad-btn">↓</button>
+    </div>
+    <!-- Fire button -->
+    <button id="btn-fire" class="fire-btn">🔥</button>
+  </div>
+</div>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

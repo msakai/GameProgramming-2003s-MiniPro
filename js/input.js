@@ -10,6 +10,9 @@ export class Input {
 
         window.addEventListener('keydown', (e) => this._onKeyDown(e));
         window.addEventListener('keyup', (e) => this._onKeyUp(e));
+
+        // Touch controls setup
+        this._setupTouchControls();
     }
 
     _onKeyDown(e) {
@@ -50,5 +53,40 @@ export class Input {
 
     isFiring() {
         return this.kFire;
+    }
+
+    _setupTouchControls() {
+        // Button to flag mapping
+        const buttonMap = {
+            'btn-up': 'kUp',
+            'btn-down': 'kDown',
+            'btn-left': 'kLeft',
+            'btn-right': 'kRight',
+            'btn-fire': 'kFire'
+        };
+
+        // Set up event listeners for each button
+        Object.entries(buttonMap).forEach(([btnId, flagName]) => {
+            const btn = document.getElementById(btnId);
+            if (!btn) return; // Graceful degradation if button doesn't exist
+
+            // Touch start → set flag to true
+            btn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this[flagName] = true;
+            }, { passive: false });
+
+            // Touch end → set flag to false
+            btn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this[flagName] = false;
+            }, { passive: false });
+
+            // Touch cancel → set flag to false (handles interruptions like phone calls)
+            btn.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                this[flagName] = false;
+            }, { passive: false });
+        });
     }
 }
