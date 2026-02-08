@@ -56,37 +56,52 @@ export class Input {
     }
 
     _setupTouchControls() {
-        // Button to flag mapping
+        // D-pad button to flag mapping
         const buttonMap = {
             'btn-up': 'kUp',
             'btn-down': 'kDown',
             'btn-left': 'kLeft',
-            'btn-right': 'kRight',
-            'btn-fire': 'kFire'
+            'btn-right': 'kRight'
         };
 
-        // Set up event listeners for each button
+        // Set up D-pad event listeners
         Object.entries(buttonMap).forEach(([btnId, flagName]) => {
             const btn = document.getElementById(btnId);
-            if (!btn) return; // Graceful degradation if button doesn't exist
+            if (!btn) return;
 
-            // Touch start → set flag to true
             btn.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this[flagName] = true;
             }, { passive: false });
 
-            // Touch end → set flag to false
             btn.addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this[flagName] = false;
             }, { passive: false });
 
-            // Touch cancel → set flag to false (handles interruptions like phone calls)
             btn.addEventListener('touchcancel', (e) => {
                 e.preventDefault();
                 this[flagName] = false;
             }, { passive: false });
         });
+
+        // Canvas touch → fire (used for title/game-over screen transitions)
+        const canvas = document.getElementById('gameCanvas');
+        if (!canvas) return;
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.kFire = true;
+        }, { passive: false });
+
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.kFire = false;
+        }, { passive: false });
+
+        canvas.addEventListener('touchcancel', (e) => {
+            e.preventDefault();
+            this.kFire = false;
+        }, { passive: false });
     }
 }

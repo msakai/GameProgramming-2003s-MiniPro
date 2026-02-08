@@ -70,28 +70,6 @@
   #btn-left  { top: 55px; left: 0; }
   #btn-right { top: 55px; right: 0; }
 
-  /* Fire button */
-  #btn-fire {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 70px;
-    height: 70px;
-    background: rgba(255, 100, 100, 0.4);
-    border: 3px solid white;
-    border-radius: 50%;
-    color: white;
-    font-size: 32px;
-    pointer-events: auto;
-    touch-action: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  #btn-fire:active {
-    background: rgba(255, 100, 100, 0.7);
-  }
-
   /* Hide on desktop with mouse pointer */
   @media (min-width: 768px) and (pointer: fine) {
     #touch-controls {
@@ -111,8 +89,6 @@
       <button id="btn-right" class="dpad-btn">→</button>
       <button id="btn-down" class="dpad-btn">↓</button>
     </div>
-    <!-- Fire button -->
-    <button id="btn-fire" class="fire-btn">🔥</button>
   </div>
 </div>
 <script type="module" src="js/main.js"></script>
