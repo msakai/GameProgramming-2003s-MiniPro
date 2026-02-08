@@ -56,52 +56,91 @@ export class Input {
     }
 
     _setupTouchControls() {
-        // D-pad button to flag mapping
-        const buttonMap = {
-            'btn-up': 'kUp',
-            'btn-down': 'kDown',
-            'btn-left': 'kLeft',
-            'btn-right': 'kRight'
-        };
+        // D-pad: zone-based touch handling on container
+        const dpad = document.getElementById('dpad');
+        if (dpad) {
+            this._dpadButtons = {
+                'btn-up': 'kUp',
+                'btn-down': 'kDown',
+                'btn-left': 'kLeft',
+                'btn-right': 'kRight'
+            };
+            this._activeDpadFlags = new Set();
 
-        // Set up D-pad event listeners
-        Object.entries(buttonMap).forEach(([btnId, flagName]) => {
-            const btn = document.getElementById(btnId);
-            if (!btn) return;
-
-            btn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                this[flagName] = true;
-            }, { passive: false });
-
-            btn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                this[flagName] = false;
-            }, { passive: false });
-
-            btn.addEventListener('touchcancel', (e) => {
-                e.preventDefault();
-                this[flagName] = false;
-            }, { passive: false });
-        });
+            dpad.addEventListener('touchstart', (e) => this._onDpadTouch(e), { passive: false });
+            dpad.addEventListener('touchmove', (e) => this._onDpadTouch(e), { passive: false });
+            dpad.addEventListener('touchend', (e) => this._onDpadTouchEnd(e), { passive: false });
+            dpad.addEventListener('touchcancel', (e) => this._onDpadTouchEnd(e), { passive: false });
+        }
 
         // Canvas touch → fire (used for title/game-over screen transitions)
         const canvas = document.getElementById('gameCanvas');
-        if (!canvas) return;
+        if (canvas) {
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.kFire = true;
+            }, { passive: false });
+            canvas.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.kFire = false;
+            }, { passive: false });
+            canvas.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                this.kFire = false;
+            }, { passive: false });
+        }
+    }
 
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            this.kFire = true;
-        }, { passive: false });
+    _onDpadTouch(e) {
+        e.preventDefault();
+        const newFlags = new Set();
+        const activeEls = new Set();
+        for (const touch of e.touches) {
+            const el = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (el && this._dpadButtons[el.id]) {
+                newFlags.add(this._dpadButtons[el.id]);
+                activeEls.add(el.id);
+            }
+        }
+        // Update direction flags
+        for (const flag of this._activeDpadFlags) {
+            if (!newFlags.has(flag)) this[flag] = false;
+        }
+        for (const flag of newFlags) {
+            this[flag] = true;
+        }
+        this._activeDpadFlags = newFlags;
+        // Update visual feedback
+        this._updateDpadActive(activeEls);
+    }
 
-        canvas.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            this.kFire = false;
-        }, { passive: false });
+    _onDpadTouchEnd(e) {
+        e.preventDefault();
+        const newFlags = new Set();
+        const activeEls = new Set();
+        for (const touch of e.touches) {
+            const el = document.elementFromPoint(touch.clientX, touch.clientY);
+            if (el && this._dpadButtons[el.id]) {
+                newFlags.add(this._dpadButtons[el.id]);
+                activeEls.add(el.id);
+            }
+        }
+        for (const flag of this._activeDpadFlags) {
+            if (!newFlags.has(flag)) this[flag] = false;
+        }
+        for (const flag of newFlags) {
+            this[flag] = true;
+        }
+        this._activeDpadFlags = newFlags;
+        this._updateDpadActive(activeEls);
+    }
 
-        canvas.addEventListener('touchcancel', (e) => {
-            e.preventDefault();
-            this.kFire = false;
-        }, { passive: false });
+    _updateDpadActive(activeEls) {
+        for (const btnId of Object.keys(this._dpadButtons)) {
+            const btn = document.getElementById(btnId);
+            if (btn) {
+                btn.classList.toggle('active', activeEls.has(btnId));
+            }
+        }
     }
 }
