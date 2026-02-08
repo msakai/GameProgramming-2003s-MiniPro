@@ -14,7 +14,7 @@
     height: 100vh;
     overflow: hidden;
   }
-  canvas {
+  #gameCanvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     width: 480px;
@@ -47,29 +47,11 @@
     pointer-events: auto;
   }
 
-  #dpad button {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid white;
-    border-radius: 8px;
-    color: white;
-    font-size: 24px;
+  #dpad-canvas {
     touch-action: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
-
-  #dpad button:active,
-  #dpad button.active {
-    background: rgba(255, 255, 255, 0.6);
-  }
-
-  #btn-up    { top: 0; left: 55px; }
-  #btn-down  { bottom: 0; left: 55px; }
-  #btn-left  { top: 55px; left: 0; }
-  #btn-right { top: 55px; right: 0; }
 
   /* Hide on desktop with mouse pointer */
   @media (min-width: 768px) and (pointer: fine) {
@@ -85,10 +67,7 @@
   <div id="touch-controls">
     <!-- D-pad -->
     <div id="dpad">
-      <button id="btn-up" class="dpad-btn">↑</button>
-      <button id="btn-left" class="dpad-btn">←</button>
-      <button id="btn-right" class="dpad-btn">→</button>
-      <button id="btn-down" class="dpad-btn">↓</button>
+      <canvas id="dpad-canvas" width="160" height="160"></canvas>
     </div>
   </div>
 </div>
