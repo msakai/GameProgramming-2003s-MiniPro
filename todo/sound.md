@@ -161,6 +161,7 @@ WAVE Track Count : 0
 
 ## 参考リンク
 
+- [SMAF / What is SMAF? / Outline of SMAF Specification / About Each Chunk](https://web.archive.org/web/20150707144613/http://smaf-yamaha.com/what/s50.html)
 - [SMAF Phrase - IANA Registry](https://www.iana.org/assignments/media-types/application/vnd.yamaha.smaf-phrase)
 - [SMAF Audio - IANA Registry](https://www.iana.org/assignments/media-types/application/vnd.yamaha.smaf-audio)
 - [Yamaha SMAF - Wikipedia](https://en.wikipedia.org/wiki/Synthetic_music_mobile_application_format)
