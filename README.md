@@ -94,5 +94,5 @@ orig/               — オリジナルのJava MEソースコード（参照用�
 
 #### オリジナル版のみに含まれるファイル（`orig/` ディレクトリ） / Files only in the original version (`orig/` directory)
 
-- Sound effects (`Click10.spf`, `explos*.spf`, `Gun*.spf`, `Hit*.spf`) — Copyright © 2003 YAMAHA CORPORATION
+- Sound effects (`Click10.spf`, `explos*.spf`, `Gun*.spf`, `Hit*.spf`) — Copyright © 2002 YAMAHA CORPORATION
 - BGM and sound effects (`bgm.spf`, `boss_bgm.spf`, `clear.mmf`) — Rights unclear
