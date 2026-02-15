@@ -19,7 +19,7 @@ js/                 — all game code as ES modules
   gameObject.js     — base class
   renderer.js       — Canvas 2D wrapper matching Java ME Graphics API
   input.js          — keyboard handler (arrow keys, Space/Z/Enter)
-  audio.js          — sound stubs (no-op play/stop)
+  audio.js          — HTML5 Audio playback (BGM loop + sound effects)
   background.js     — scrolling checkerboard
   player.js         — player movement, auto-fire, collision
   bullet.js         — Bullet, SimpleBullet, EnemyBullet0
@@ -30,7 +30,7 @@ js/                 — all game code as ES modules
   scoreItem.js      — falling score pickups
   title.js          — title screen
   gameOver.js       — game over / clear screen
-res/                — sprite PNGs (copied from original)
+res/                — sprite PNGs and audio files (Opus/MP3)
 orig/               — original Java ME source (read-only reference)
 ```
 

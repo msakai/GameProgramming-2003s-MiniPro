@@ -162,9 +162,43 @@ across 3 bytes in base-100; the port stores it as a plain integer string.
 
 ### 8. Sound
 
-The J-PHONE `PhrasePlayer`/`PhraseTrack` API has no browser equivalent for the
-`.spf` format.  `audio.js` exports an array of stub objects with no-op `play()`
-and `stop()` methods, preserving the call sites so sound can be added later.
+The original game uses Yamaha's SMAF-Phrase (`.spf`) format for sound effects
+and SMAF (`.mmf`) for music, played via the J-PHONE `PhrasePlayer`/`PhraseTrack`
+API.  Four sound slots are loaded:
+
+| Slot | Original file  | Usage              | Playback   |
+|------|----------------|--------------------|------------|
+| 0    | bgm.spf        | Background music   | Loop       |
+| 1    | Gun3.spf       | Enemy hit          | One-shot   |
+| 2    | Click10.spf    | Score item pickup  | One-shot   |
+| 3    | Hit4.spf       | Player hit         | One-shot   |
+
+The original resource directory contains 15 sound files in total (13 `.spf` and
+1 `.mmf`), of which 4 are used by the game code.  SMAF-Phrase (`.spf`) is a
+proprietary Yamaha format for real-time game audio (MIME type:
+`application/vnd.yamaha.smaf-phrase`), distinct from standard SMAF/MMF used for
+ringtones.  Files begin with the `MMMD` magic number and contain `CNTI`, `MMMG`,
+`VOIC`, and `SEQU` chunks.
+
+No lossless conversion path exists:
+
+- **FFmpeg** — supports standard MMF but rejects SMAF-Phrase (`Unsupported SMAF
+  chunk` on the `MMMG` chunk).
+- **Online converters** — all failed or returned errors.
+- **mmftool** — reported zero MIDI/WAVE tracks.
+
+The sound files were ultimately converted by playing them through the Yamaha
+ATS-SMAFPhraseL1 tool running under WINE and capturing the output via a virtual
+audio loopback device (BlackHole 2ch) with Audacity.  The recordings were saved
+as FLAC (lossless, for archival) and Opus/MP3 (lossy, for distribution).
+
+The port uses the HTML5 `Audio` API.  Each sound slot wraps an `Audio` element
+with `play(loop)` / `stop()` matching the original `PhraseTrack` interface, so
+all call sites remain unchanged.  The `play()` parameter convention is preserved:
+`0` for looping (BGM), non-zero for one-shot (effects).
+
+Browser autoplay restrictions are handled by installing a one-time `keydown` /
+`click` listener that retries BGM playback on first user interaction.
 
 ## Class Hierarchy
 
@@ -198,6 +232,8 @@ All classes receive the `game` instance via their constructor (replacing Java's
   port matches this behavior.
 - **Font metrics differ.** The 8px monospace font used by `Renderer` does not
   match J-PHONE's built-in font.  Text positioning may be slightly off.
-- **No sound.** All sound calls are stubs.
+- **Sound source differs.** The audio files were re-recorded from the original
+  SMAF-Phrase data via a virtual audio device, not decoded losslessly.  The BGM
+  has been replaced with a different track.
 - **Bit class omitted.** `Bit.java` (an orbiting companion object) is defined in
   the original source but never instantiated by any game code.
