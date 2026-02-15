@@ -6,7 +6,7 @@ import { Background } from './background.js';
 import { Player } from './player.js';
 import { Title } from './title.js';
 import { GameOver } from './gameOver.js';
-import { sound } from './audio.js';
+import { sound, soundReady } from './audio.js';
 
 const MSECS_PER_TICK = 20;
 const WIDTH = 120;
@@ -155,7 +155,7 @@ class Game {
     }
 
     async start() {
-        await this.loadImages();
+        await Promise.all([this.loadImages(), soundReady]);
         this.initGame();
         requestAnimationFrame((t) => this.loop(t));
     }
