@@ -8,11 +8,11 @@
 
 慶應義塾大学SFCの2003年春学期「ゲームプログラミング」（担当：和田 理彦、杉山 雄一）の課題（ミニプロ）として作成した縦スクロールシューティングゲームです。
 
-当時のJ-PHONE（現ソフトバンク）の携帯電話向けに、Java ME (MIDP 1.0) で開発した本作を、2026年にClaude Codeを用いてHTML5 Canvas + JavaScriptへと移植しました。オリジナルのゲームロジックと演出を可能な限り忠実に再現していますが、BGMと効果音は移植されていません。
+当時のJ-PHONE（現ソフトバンク）の携帯電話向けに、Java ME (MIDP 1.0) で開発した本作を、2026年にClaude Codeを用いてHTML5 Canvas + JavaScriptへと移植しました。オリジナルのゲームロジックと演出を可能な限り忠実に再現していますが、BGMについては別のものに差し替えています。
 
 This is a vertical-scrolling shoot-'em-up game created as a mini-project assignment for the "Game Programming" course (Spring 2003, taught by Masahiko Wada and Yuichi Sugiyama) at Keio University SFC.
 
-Originally developed for J-PHONE mobile phones using Java ME (MIDP 1.0), this game was ported to HTML5 Canvas + JavaScript in 2026 using Claude Code. The port faithfully recreates the original game logic and visual effects, though background music and sound effects were not included.
+Originally developed for J-PHONE mobile phones using Java ME (MIDP 1.0), this game was ported to HTML5 Canvas + JavaScript in 2026 using Claude Code. The port faithfully recreates the original game logic and visual effects, though the background music was replaced with a different track.
 
 ## 遊び方 / How to Play
 
@@ -91,6 +91,8 @@ orig/               — オリジナルのJava MEソースコード（参照用�
 
 - `ball.png` — From the "Game Programming" course sample materials
 - Other image files (`*.png`) — © Masahiro Sakai 2003
+- Sound effects (`Click10.*`, `Gun3.*`, `Hit4.*`) — Copyright © 2002 YAMAHA CORPORATION
+- BGM (`bgm.mp3`) - [レトロシューティング](https://dova-s.jp/bgm/play11590.html) composed by ハヤシユウ
 
 #### オリジナル版のみに含まれるファイル（`orig/` ディレクトリ） / Files only in the original version (`orig/` directory)
 
