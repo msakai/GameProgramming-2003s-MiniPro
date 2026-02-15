@@ -173,11 +173,24 @@ API.  Four sound slots are loaded:
 | 2    | Click10.spf    | Score item pickup  | One-shot   |
 | 3    | Hit4.spf       | Player hit         | One-shot   |
 
-The SMAF-Phrase format is a proprietary Yamaha format for real-time game audio,
-with no browser support and very limited converter availability (FFmpeg only
-supports standard MMF, not SMAF-Phrase).  The sound files were converted to
-standard audio formats by playing them through a Yamaha tool running under WINE
-and capturing the output via a virtual audio loopback device (BlackHole).
+The original resource directory contains 15 sound files in total (13 `.spf` and
+1 `.mmf`), of which 4 are used by the game code.  SMAF-Phrase (`.spf`) is a
+proprietary Yamaha format for real-time game audio (MIME type:
+`application/vnd.yamaha.smaf-phrase`), distinct from standard SMAF/MMF used for
+ringtones.  Files begin with the `MMMD` magic number and contain `CNTI`, `MMMG`,
+`VOIC`, and `SEQU` chunks.
+
+No lossless conversion path exists:
+
+- **FFmpeg** — supports standard MMF but rejects SMAF-Phrase (`Unsupported SMAF
+  chunk` on the `MMMG` chunk).
+- **Online converters** — all failed or returned errors.
+- **mmftool** — reported zero MIDI/WAVE tracks.
+
+The sound files were ultimately converted by playing them through the Yamaha
+ATS-SMAFPhraseL1 tool running under WINE and capturing the output via a virtual
+audio loopback device (BlackHole 2ch) with Audacity.  The recordings were saved
+as FLAC (lossless, for archival) and Opus/MP3 (lossy, for distribution).
 
 The port uses the HTML5 `Audio` API.  Each sound slot wraps an `Audio` element
 with `play(loop)` / `stop()` matching the original `PhraseTrack` interface, so
