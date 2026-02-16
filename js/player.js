@@ -7,6 +7,7 @@ import { Explosion } from './explosion.js';
 import { ScoreItem } from './scoreItem.js';
 import { rand } from './math.js';
 import { HCENTER, VCENTER, LEFT, TOP } from './renderer.js';
+import { t } from './i18n.js';
 
 export class Player extends GameObject {
     constructor(game) {
@@ -105,7 +106,7 @@ export class Player extends GameObject {
             this.game.sound[3].play(1);
 
             if (this.game.nPlayers === 0) {
-                this.game.gameover('GAME OVER');
+                this.game.gameover(t('gameOver'));
             } else {
                 this.game.nPlayers--;
                 this.mutekiJikan = 100;
