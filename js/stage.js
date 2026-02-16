@@ -4,6 +4,7 @@ import { GameObject } from './gameObject.js';
 import { Enemy1, Enemy2, Enemy3, Enemy4, Enemy5 } from './enemy.js';
 import { Boss1, Boss2, Boss3 } from './boss.js';
 import { rand } from './math.js';
+import { t } from './i18n.js';
 
 const MSECS_PER_TICK = 20;
 
@@ -256,7 +257,7 @@ export class Stage3 extends GameObject {
         yield* waitMsec(2000);
 
         this.game.removeObject(this);
-        this.game.gameover('GAME CLEAR');
+        this.game.gameover(t('gameClear'));
     }
 
     update() {

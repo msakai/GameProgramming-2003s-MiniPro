@@ -2,6 +2,7 @@
 
 import { GameObject } from './gameObject.js';
 import { HCENTER, TOP } from './renderer.js';
+import { t } from './i18n.js';
 
 export class GameOver extends GameObject {
     constructor(game, title) {
@@ -26,7 +27,7 @@ export class GameOver extends GameObject {
 
         g.setColor(0xFFFFFF);
         g.drawString(this.title, W / 2, 20, HCENTER | TOP);
-        g.drawString('Score: ' + this.game.score, W / 2, 50, HCENTER | TOP);
-        g.drawString('High Score: ' + this.game.highScore, W / 2, 70, HCENTER | TOP);
+        g.drawString(t('score') + this.game.score, W / 2, 50, HCENTER | TOP);
+        g.drawString(t('highScore') + this.game.highScore, W / 2, 70, HCENTER | TOP);
     }
 }
