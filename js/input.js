@@ -233,9 +233,9 @@ export class Input {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         const labelR = (r + innerR) / 2;
-        ctx.fillText('▲', cx, cy - labelR);
-        ctx.fillText('▼', cx, cy + labelR);
-        ctx.fillText('◀', cx - labelR, cy);
-        ctx.fillText('▶', cx + labelR, cy);
+        ctx.fillText('▲︎', cx, cy - labelR);
+        ctx.fillText('▼︎', cx, cy + labelR);
+        ctx.fillText('◀︎', cx - labelR, cy);
+        ctx.fillText('▶︎', cx + labelR, cy);
     }
 }
